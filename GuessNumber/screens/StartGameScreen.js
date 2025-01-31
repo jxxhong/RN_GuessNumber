@@ -2,7 +2,7 @@ import { TextInput, View, StyleSheet, Alert } from 'react-native';
 import React, { useState } from 'react';
 import PrimaryButton from '../components/PrimaryButton';
 
-export default function StartGameScreen() {
+export default function StartGameScreen({ onPickNumber }) {
 	const [enteredNumber, setEnteredNumber] = useState('');
 
 	function numberInputHandler(enteredText) {
@@ -14,9 +14,9 @@ export default function StartGameScreen() {
 	}
 
 	function confirmInputHandler() {
-		const choseNumber = parseInt(enteredNumber);
+		const chosenNumber = parseInt(enteredNumber);
 
-		if (isNaN(choseNumber) || choseNumber <= 0 || choseNumber > 99) {
+		if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
 			Alert.alert(
 				'유효하지 않은 숫자입니다.',
 				'숫자는 1과 99사이어야만 합니다.',
@@ -24,6 +24,8 @@ export default function StartGameScreen() {
 			);
 			return;
 		}
+
+		onPickNumber(chosenNumber);
 	}
 
 	return (
